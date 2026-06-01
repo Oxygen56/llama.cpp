@@ -1114,6 +1114,18 @@ uint32_t llama_kv_cache::get_n_stream() const {
     return n_stream;
 }
 
+uint32_t llama_kv_cache::n_cells_max() const {
+    return get_size()*get_n_stream();
+}
+
+uint32_t llama_kv_cache::n_cells_used() const {
+    uint32_t total = 0;
+    for (uint32_t s = 0; s < n_stream; ++s) {
+        total += v_cells[s].get_used();
+    }
+    return total;
+}
+
 bool llama_kv_cache::get_has_shift() const {
     bool result = false;
 

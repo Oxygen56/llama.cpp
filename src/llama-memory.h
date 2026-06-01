@@ -120,6 +120,14 @@ struct llama_memory_i {
 
     virtual void state_write(llama_io_write_i & io, llama_seq_id seq_id = -1, llama_state_seq_flags flags = 0) const = 0;
     virtual void state_read (llama_io_read_i  & io, llama_seq_id seq_id = -1, llama_state_seq_flags flags = 0) = 0;
+
+    // cell utilization
+
+    // total number of cells in the memory
+    virtual uint32_t n_cells_max() const { return 0; }
+
+    // number of cells currently in use
+    virtual uint32_t n_cells_used() const { return 0; }
 };
 
 using llama_memory_ptr = std::unique_ptr<llama_memory_i>;

@@ -83,6 +83,13 @@ public:
     llama_kv_cache_iswa * get_mem_attn() const;
     llama_memory_recurrent * get_mem_recr() const;
 
+    //
+    // llama_memory_i cell utilization
+    //
+
+    uint32_t n_cells_max() const override;
+    uint32_t n_cells_used() const override;
+
 private:
     const llama_hparams & hparams;
 

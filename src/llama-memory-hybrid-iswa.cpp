@@ -208,6 +208,14 @@ llama_memory_recurrent * llama_memory_hybrid_iswa::get_mem_recr() const {
     return mem_recr.get();
 }
 
+uint32_t llama_memory_hybrid_iswa::n_cells_max() const {
+    return mem_attn ? mem_attn->n_cells_max() : 0;
+}
+
+uint32_t llama_memory_hybrid_iswa::n_cells_used() const {
+    return mem_attn ? mem_attn->n_cells_used() : 0;
+}
+
 //
 // llama_memory_hybrid_iswa_context
 //

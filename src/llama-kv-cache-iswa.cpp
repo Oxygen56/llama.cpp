@@ -247,6 +247,14 @@ llama_kv_cache * llama_kv_cache_iswa::get_swa() const {
     return kv_swa.get();
 }
 
+uint32_t llama_kv_cache_iswa::n_cells_max() const {
+    return kv_base ? kv_base->n_cells_max() : 0;
+}
+
+uint32_t llama_kv_cache_iswa::n_cells_used() const {
+    return kv_base ? kv_base->n_cells_used() : 0;
+}
+
 //
 // llama_kv_cache_iswa_context
 //

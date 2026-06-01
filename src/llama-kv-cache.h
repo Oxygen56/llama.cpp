@@ -154,6 +154,13 @@ public:
     uint32_t get_size()     const;
     uint32_t get_n_stream() const;
 
+    //
+    // llama_memory_i cell utilization
+    //
+
+    uint32_t n_cells_max() const override;
+    uint32_t n_cells_used() const override;
+
     bool get_has_shift() const;
 
     ggml_type type_k() const;

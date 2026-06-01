@@ -61,6 +61,13 @@ public:
 
     bool get_can_shift() const override;
 
+    //
+    // llama_memory_i cell utilization
+    //
+
+    uint32_t n_cells_max() const override;
+    uint32_t n_cells_used() const override;
+
     // state write/load
 
     void state_write(llama_io_write_i & io, llama_seq_id seq_id = -1, llama_state_seq_flags flags = 0) const override;

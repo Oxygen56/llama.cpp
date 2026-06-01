@@ -2176,6 +2176,13 @@ private:
                     res->n_tasks_deferred    = queue_tasks.queue_tasks_deferred_size();
                     res->t_start             = metrics.t_start;
 
+                    // KV cache utilization
+                    {
+                        auto * mem = llama_get_memory(ctx_tgt);
+                        res->kv_cache_cells_used = llama_memory_n_cells_used(mem);
+                        res->kv_cache_cells_max  = llama_memory_n_cells_max(mem);
+                    }
+
                     res->n_prompt_tokens_processed_total = metrics.n_prompt_tokens_processed_total;
                     res->t_prompt_processing_total       = metrics.t_prompt_processing_total;
                     res->n_tokens_predicted_total        = metrics.n_tokens_predicted_total;
@@ -4009,6 +4016,18 @@ void server_routes::init_routes() {
                     {"name",  "n_busy_slots_per_decode"},
                     {"help",  "Average number of busy slots per llama_decode() call"},
                     {"value",  (float) res_task->n_busy_slots_total / std::max((float) res_task->n_decode_total, 1.f)}
+            },{
+                    {"name",  "kv_cache_used_cells"},
+                    {"help",  "Number of KV cache cells currently occupied."},
+                    {"value",  (uint64_t) res_task->kv_cache_cells_used}
+            },{
+                    {"name",  "kv_cache_total_cells"},
+                    {"help",  "Total number of KV cache cells available."},
+                    {"value",  (uint64_t) res_task->kv_cache_cells_max}
+            },{
+                    {"name",  "kv_cache_usage_ratio"},
+                    {"help",  "Ratio of KV cache cells currently used."},
+                    {"value",  res_task->kv_cache_cells_max > 0 ? (float) res_task->kv_cache_cells_used / (float) res_task->kv_cache_cells_max : 0.f}
             }}}
         };
 

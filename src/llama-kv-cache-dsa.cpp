@@ -178,6 +178,14 @@ llama_kv_cache * llama_kv_cache_dsa::get_lid() const {
     return kv_lid.get();
 }
 
+uint32_t llama_kv_cache_dsa::n_cells_max() const {
+    return kv_mla ? kv_mla->n_cells_max() : 0;
+}
+
+uint32_t llama_kv_cache_dsa::n_cells_used() const {
+    return kv_mla ? kv_mla->n_cells_used() : 0;
+}
+
 //
 // llama_kv_cache_dsa_context
 //

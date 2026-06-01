@@ -71,6 +71,13 @@ public:
     llama_kv_cache * get_mla() const;
     llama_kv_cache * get_lid() const;
 
+    //
+    // llama_memory_i cell utilization
+    //
+
+    uint32_t n_cells_max() const override;
+    uint32_t n_cells_used() const override;
+
 private:
     // we keep indexer KV cache hparams instance here as llama_kv_cache stores only reference to it
     llama_hparams hparams_lid;

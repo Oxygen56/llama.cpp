@@ -527,6 +527,10 @@ struct server_task_result_metrics : server_task_result {
     uint64_t n_decode_total     = 0;
     uint64_t n_busy_slots_total = 0;
 
+    // KV cache cell utilization
+    uint32_t kv_cache_cells_used = 0;
+    uint32_t kv_cache_cells_max  = 0;
+
     // while we can also use std::vector<server_slot> this requires copying the slot object which can be quite messy
     // therefore, we use json to temporarily store the slot.to_json() result
     json slots_data = json::array();

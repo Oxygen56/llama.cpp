@@ -70,6 +70,13 @@ public:
     llama_kv_cache * get_base() const;
     llama_kv_cache * get_swa () const;
 
+    //
+    // llama_memory_i cell utilization
+    //
+
+    uint32_t n_cells_max() const override;
+    uint32_t n_cells_used() const override;
+
 private:
     const llama_hparams & hparams;
 

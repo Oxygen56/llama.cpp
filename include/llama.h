@@ -769,6 +769,12 @@ extern "C" {
     // Check if the memory supports shifting
     LLAMA_API bool llama_memory_can_shift(llama_memory_t mem);
 
+    // Get the total number of cells in the memory (capacity)
+    LLAMA_API uint32_t llama_memory_n_cells_max(llama_memory_t mem);
+
+    // Get the number of cells currently in use
+    LLAMA_API uint32_t llama_memory_n_cells_used(llama_memory_t mem);
+
     //
     // State / sessions
     //
