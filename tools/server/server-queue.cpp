@@ -385,6 +385,7 @@ server_task_result_ptr server_response_reader::next(const std::function<bool()> 
                 if (time_elapsed_ms > 30000) {
                     SRV_WRN("%s", "request cancelled after 30s, potentially a client-side timeout; please check your client's code\n");
                 }
+                stop(); // cancel remaining tasks
                 return nullptr;
             }
         } else {

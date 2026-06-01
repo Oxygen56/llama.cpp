@@ -3828,6 +3828,7 @@ std::unique_ptr<server_res_generator> server_routes::handle_completions_impl(
             try {
                 if (req.should_stop()) {
                     SRV_DBG("%s", "stopping streaming due to should_stop condition\n");
+                    res_this->rd.stop(); // cancel remaining tasks
                     return false; // should_stop condition met
                 }
 
@@ -3862,6 +3863,7 @@ std::unique_ptr<server_res_generator> server_routes::handle_completions_impl(
                 if (result == nullptr) {
                     SRV_DBG("%s", "stopping streaming due to should_stop condition\n");
                     GGML_ASSERT(req.should_stop());
+                    res_this->rd.stop(); // cancel remaining tasks
                     return false; // should_stop condition met
                 }
 
